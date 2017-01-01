@@ -18,8 +18,11 @@ $endif$
 $for(css)$
   <link rel="stylesheet" type="text/css" href="$css$" />
 $endfor$
+$for(header-includes)$
+  $header-includes$
+$endfor$
 </head>
-<body>
+<body$if(coverpage)$ id="cover"$endif$>
 $if(titlepage)$
 <section epub:type="titlepage">
 $for(title)$
@@ -30,13 +33,13 @@ $else$
 $endif$
 $endfor$
 $if(subtitle)$
-  <h1 class="subtitle">$subtitle$</h1>
+  <p class="subtitle">$subtitle$</p>
 $endif$
 $for(author)$
-  <h2 class="author">$author$</h2>
+  <p class="author">$author$</p>
 $endfor$
 $for(creator)$
-  <h2 class="$creator.type$">$creator.text$</h2>
+  <p class="$creator.role$">$creator.text$</p>
 $endfor$
 $if(publisher)$
   <p class="publisher">$publisher$</p>
@@ -45,11 +48,17 @@ $if(date)$
   <p class="date">$date$</p>
 $endif$
 $if(rights)$
-  <p class="rights">$rights$</p>
+  <div class="rights">$rights$</div>
 $endif$
 </section>
 $else$
+$for(include-before)$
+$include-before$
+$endfor$
 $body$
+$for(include-after)$
+$include-after$
+$endfor$
 $endif$
 </body>
 </html>
